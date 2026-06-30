@@ -33,7 +33,7 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="relative mx-auto flex max-w-layout flex-col px-5 pb-20 pt-36 sm:px-8 md:pt-44"
+        className="relative mx-auto flex max-w-layout flex-col px-5 pb-20 pt-36 sm:px-8 md:pb-28 md:pt-44"
       >
         <motion.div
           variants={item}
