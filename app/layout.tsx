@@ -33,6 +33,12 @@ export const metadata: Metadata = {
     title: `${profile.name} — ${profile.role}`,
     description: profile.headline,
     type: "website",
+    siteName: `${profile.name} · @${profile.handle}`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} — ${profile.role}`,
+    description: profile.headline,
   },
 };
 
@@ -42,11 +48,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Applied before paint to avoid a flash of the wrong theme (FOUC).
+const themeScript = `(function(){try{var t=localStorage.getItem('theme')||'dark';var r=document.documentElement;r.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} dark`}>
+    <html
+      lang="en"
+      className={`${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -6,7 +6,7 @@ const WEEKS = 12;
 const DAYS = 7;
 
 const LEVELS = [
-  "bg-neutral-900",
+  "bg-hairline/70",
   "bg-emerald-900/60",
   "bg-emerald-700/70",
   "bg-emerald-500/80",
@@ -54,7 +54,7 @@ export function ContributionGraph() {
         ))}
       </div>
 
-      <div className="flex items-center justify-end gap-1.5 font-mono text-[10px] text-neutral-600">
+      <div className="flex items-center justify-end gap-1.5 font-mono text-[10px] text-faint">
         <span>less</span>
         {LEVELS.map((cls, i) => (
           <span key={i} className={`h-2.5 w-2.5 rounded-[3px] ${cls}`} />

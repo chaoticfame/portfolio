@@ -2,14 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+/* -------------------------------------------------------------------------- */
+/*  THEME TOKENS — channel triplets so Tailwind alpha modifiers work          */
+/*  (e.g. bg-panel/40). Dark is the default; .light overrides.                */
+/* -------------------------------------------------------------------------- */
+
 :root {
-  --background: #050505;
-  --foreground: #e8e8e8;
+  --surface: 5 5 5;
+  --panel: 23 23 23;
+  --hairline: 38 38 38;
+  --hairline-strong: 64 64 64;
+  --content: 237 237 237;
+  --muted: 168 168 168;
+  --faint: 115 115 115;
+
+  --grid-line: 255 255 255;
+  --grid-alpha: 0.035;
+  --vignette: 255 255 255;
+  --vignette-alpha: 0.06;
+}
+
+:root.light {
+  --surface: 248 248 246;
+  --panel: 255 255 255;
+  --hairline: 226 226 222;
+  --hairline-strong: 196 196 190;
+  --content: 23 23 23;
+  --muted: 82 82 82;
+  --faint: 122 122 118;
+
+  --grid-line: 0 0 0;
+  --grid-alpha: 0.04;
+  --vignette: 0 0 0;
+  --vignette-alpha: 0.025;
 }
 
 @layer base {
   * {
-    @apply border-neutral-800;
+    border-color: rgb(var(--hairline));
   }
 
   html {
@@ -17,31 +47,42 @@
   }
 
   body {
-    @apply bg-ink text-neutral-300 antialiased;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--muted));
+    @apply antialiased;
     font-feature-settings: "ss01", "cv01";
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   ::selection {
-    @apply bg-neutral-200 text-black;
+    background-color: rgb(var(--content));
+    color: rgb(var(--surface));
   }
 }
 
 @layer utilities {
-  /* Subtle grid + radial vignette backdrop */
+  /* Subtle grid + radial vignette backdrop (theme-aware) */
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      linear-gradient(
+        to right,
+        rgb(var(--grid-line) / var(--grid-alpha)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgb(var(--grid-line) / var(--grid-alpha)) 1px,
+        transparent 1px
+      );
     background-size: 64px 64px;
   }
 
   .bg-vignette {
-    background:
-      radial-gradient(
-        60% 50% at 50% 0%,
-        rgba(255, 255, 255, 0.06) 0%,
-        transparent 70%
-      );
+    background: radial-gradient(
+      60% 50% at 50% 0%,
+      rgb(var(--vignette) / var(--vignette-alpha)) 0%,
+      transparent 70%
+    );
   }
 
   .text-balance {
@@ -85,7 +126,7 @@
   /* Thin custom scrollbar for activity panels */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: #262626 transparent;
+    scrollbar-color: rgb(var(--hairline-strong)) transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar {
@@ -94,7 +135,19 @@
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: #262626;
+    background-color: rgb(var(--hairline-strong));
     border-radius: 9999px;
+  }
+}
+
+/* Respect users who prefer reduced motion: disable transitions/animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

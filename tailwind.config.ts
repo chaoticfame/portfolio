@@ -10,15 +10,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: {
-          DEFAULT: "#050505",
-          soft: "#0a0a0a",
-          panel: "#0d0d0f",
-        },
-        accent: {
-          DEFAULT: "#e8e8e8",
-          muted: "#8a8a8a",
-        },
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        panel: "rgb(var(--panel) / <alpha-value>)",
+        hairline: "rgb(var(--hairline) / <alpha-value>)",
+        "hairline-strong": "rgb(var(--hairline-strong) / <alpha-value>)",
+        content: "rgb(var(--content) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        faint: "rgb(var(--faint) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

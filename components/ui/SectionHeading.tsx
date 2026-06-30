@@ -17,13 +17,13 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <Reveal className="mb-12 md:mb-16">
-      <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-neutral-500">
-        <span className="text-neutral-300">{index}</span>
-        <span className="h-px w-8 bg-neutral-700" />
+      <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-faint">
+        <span className="text-muted">{index}</span>
+        <span className="h-px w-8 bg-hairline-strong" />
         <span>{title}</span>
       </div>
       {description ? (
-        <p className="mt-4 max-w-2xl text-balance text-lg leading-relaxed text-neutral-400">
+        <p className="mt-4 max-w-2xl text-balance text-lg leading-relaxed text-muted">
           {description}
         </p>
       ) : null}
