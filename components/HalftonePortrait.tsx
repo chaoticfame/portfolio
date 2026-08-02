@@ -19,7 +19,7 @@ export function HalftonePortrait({ src, alt, initials }: HalftonePortraitProps) 
   const [loaded, setLoaded] = useState(true);
 
   return (
-    <div className="relative w-full max-w-[20rem]">
+    <div className="relative w-72 sm:w-80">
       <div className="halftone-dots halftone-scan relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-hairline bg-panel">
         {loaded ? (
           <Image
