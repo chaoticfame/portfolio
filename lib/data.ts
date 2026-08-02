@@ -27,8 +27,9 @@ export const profile = {
 /* -------------------------------------------------------------------------- */
 
 export const about = {
-  /** Drop your photo here: public/portrait.png (square works best). */
-  portrait: "/portrait.png",
+  /** Optimized (WebP) portrait served via next/image. Regenerate with:
+   *  node scripts/optimize-portrait.mjs  (reads public/portrait.png). */
+  portrait: "/portrait.webp",
   /** Shown as a placeholder until a real photo is added. */
   initials: "DE",
   displayName: "Demi Elago",

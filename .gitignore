@@ -32,3 +32,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large source image — commit the optimized portrait.webp instead
+/public/portrait.png

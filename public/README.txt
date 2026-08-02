@@ -1,9 +1,10 @@
-Place your About-page photo here as:
+About-page photo workflow:
 
-    portrait.png
+1. Drop your source photo here as:  portrait.png  (square or 4:5 works best)
+2. Optimize it:  node scripts/optimize-portrait.mjs
+   -> generates portrait.webp (downscaled to 900px, ~30 KB)
+3. /about serves portrait.webp via next/image (see lib/data.ts -> about.portrait)
 
-Tips:
-- A square or 4:5 (portrait) crop works best.
-- It will automatically be rendered in a monochrome / halftone style on /about.
-- Until this file exists, the About page shows your initials ("DE") as a placeholder.
-- You can change the expected filename in lib/data.ts -> `about.portrait`.
+Notes:
+- It is automatically rendered in a monochrome / halftone style.
+- If the file is missing, the About page shows your initials ("DE") as a placeholder.

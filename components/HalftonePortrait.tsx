@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type HalftonePortraitProps = {
   src: string;
@@ -10,8 +11,9 @@ type HalftonePortraitProps = {
 
 /**
  * Monochrome, dithered/halftone portrait inspired by classic editorial
- * print treatments. Falls back to a styled initials block if the photo
- * file is missing, so the layout never breaks.
+ * print treatments. Served via next/image (responsive, lazy, modern
+ * formats) and falls back to a styled initials block if the photo is
+ * missing, so the layout never breaks.
  */
 export function HalftonePortrait({ src, alt, initials }: HalftonePortraitProps) {
   const [loaded, setLoaded] = useState(true);
@@ -20,12 +22,14 @@ export function HalftonePortrait({ src, alt, initials }: HalftonePortraitProps) 
     <div className="relative w-full max-w-[20rem]">
       <div className="halftone-dots halftone-scan relative aspect-[4/5] w-full overflow-hidden rounded-xl border border-hairline bg-panel">
         {loaded ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={src}
             alt={alt}
+            fill
+            priority
+            sizes="(max-width: 768px) 80vw, 320px"
             onError={() => setLoaded(false)}
-            className="halftone-img h-full w-full object-cover"
+            className="halftone-img object-cover"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-hairline to-surface">
