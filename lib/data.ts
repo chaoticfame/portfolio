@@ -27,8 +27,8 @@ export const profile = {
 /* -------------------------------------------------------------------------- */
 
 export const about = {
-  /** Drop your photo here: public/portrait.jpg (square works best). */
-  portrait: "/portrait.jpg",
+  /** Drop your photo here: public/portrait.png (square works best). */
+  portrait: "/portrait.png",
   /** Shown as a placeholder until a real photo is added. */
   initials: "DE",
   displayName: "Demi Elago",

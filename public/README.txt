@@ -1,6 +1,6 @@
 Place your About-page photo here as:
 
-    portrait.jpg
+    portrait.png
 
 Tips:
 - A square or 4:5 (portrait) crop works best.
