@@ -3,13 +3,21 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Terminal } from "lucide-react";
+import { Search, Terminal } from "lucide-react";
 import { profile, sections } from "@/lib/data";
 import { ThemeToggle } from "./ThemeToggle";
+import { OPEN_EVENT } from "./CommandPalette";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>(sections[0].id);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.platform));
+  }, []);
+
+  const openPalette = () => window.dispatchEvent(new Event(OPEN_EVENT));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -91,6 +99,25 @@ export function Nav() {
           >
             About
           </Link>
+          <button
+            type="button"
+            onClick={openPalette}
+            aria-label="Open command palette"
+            className="group hidden items-center gap-2 rounded-md border border-hairline px-2.5 py-1.5 font-mono text-xs text-muted transition-colors hover:border-hairline-strong hover:text-content sm:flex"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <kbd className="text-[10px] text-faint group-hover:text-muted">
+              {isMac ? "⌘K" : "Ctrl K"}
+            </kbd>
+          </button>
+          <button
+            type="button"
+            onClick={openPalette}
+            aria-label="Open command palette"
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-hairline text-muted transition-colors hover:border-hairline-strong hover:text-content sm:hidden"
+          >
+            <Search className="h-4 w-4" />
+          </button>
           <ThemeToggle />
           <a
             href="https://github.com/chaoticfame"

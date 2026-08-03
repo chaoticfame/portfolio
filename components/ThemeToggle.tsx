@@ -19,6 +19,14 @@ export function ThemeToggle() {
     const stored = (localStorage.getItem("theme") as Theme | null) ?? "dark";
     setTheme(stored);
     setMounted(true);
+
+    // Stay in sync when the theme is changed elsewhere (e.g. command palette).
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<Theme>).detail;
+      if (detail === "light" || detail === "dark") setTheme(detail);
+    };
+    window.addEventListener("themechange", onThemeChange);
+    return () => window.removeEventListener("themechange", onThemeChange);
   }, []);
 
   const toggle = () => {
@@ -26,6 +34,7 @@ export function ThemeToggle() {
     setTheme(next);
     applyTheme(next);
     localStorage.setItem("theme", next);
+    window.dispatchEvent(new CustomEvent("themechange", { detail: next }));
   };
 
   return (
