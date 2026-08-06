@@ -1,4 +1,7 @@
+"use client";
+
 import { profile, socialLinks } from "@/lib/data";
+import { OPEN_TERMINAL_EVENT } from "./Terminal";
 
 export function Footer() {
   return (
@@ -15,6 +18,19 @@ export function Footer() {
             >
               {profile.email}
             </a>
+            <div>
+              <button
+                type="button"
+                onClick={() =>
+                  window.dispatchEvent(new Event(OPEN_TERMINAL_EVENT))
+                }
+                className="group mt-4 inline-flex items-center gap-2 font-mono text-xs text-faint transition-colors hover:text-content"
+              >
+                <span className="text-emerald-500/80">$</span>
+                open interactive terminal
+                <span className="inline-block h-3 w-1.5 animate-blink bg-faint group-hover:bg-content" />
+              </button>
+            </div>
           </div>
 
           <div className="flex flex-col gap-2">

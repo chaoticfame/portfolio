@@ -13,10 +13,12 @@ import {
   Linkedin,
   Mail,
   SunMoon,
+  TerminalSquare,
   User,
   type LucideIcon,
 } from "lucide-react";
 import { profile, sections, socialLinks } from "@/lib/data";
+import { OPEN_TERMINAL_EVENT } from "./Terminal";
 
 export const OPEN_EVENT = "open-command-palette";
 
@@ -142,6 +144,15 @@ export function CommandPalette() {
         icon: SunMoon,
         keywords: "color mode dark light appearance",
         perform: toggleTheme,
+      },
+      {
+        id: "open-terminal",
+        label: "Open interactive terminal",
+        group: "Actions",
+        icon: TerminalSquare,
+        keywords: "shell bash console cli command",
+        hint: "$",
+        perform: () => window.dispatchEvent(new Event(OPEN_TERMINAL_EVENT)),
       },
     ];
 

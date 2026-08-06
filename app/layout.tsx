@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
 import { profile } from "@/lib/data";
 import { CommandPalette } from "@/components/CommandPalette";
+import { Terminal } from "@/components/Terminal";
 import "./globals.css";
 
 const sans = Inter({
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body>
         {children}
         <CommandPalette />
+        <Terminal />
       </body>
     </html>
   );
