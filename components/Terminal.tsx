@@ -76,6 +76,9 @@ export function Terminal() {
             "  theme <mode>      switch theme (dark/light) or toggle",
             "  ls                list site sections",
             "  echo <text>       print text",
+            "  neofetch          system-style summary",
+            "  history           show command history",
+            "  pwd               print working directory",
             "  date              current date/time",
             "  clear             clear the screen",
             "  exit              close the terminal",
@@ -197,6 +200,31 @@ export function Terminal() {
           print(arg);
           break;
 
+        case "pwd":
+          print(`/home/${profile.handle}/portfolio`);
+          break;
+
+        case "history":
+          if (history.length === 0) {
+            print("no commands yet.");
+          } else {
+            printMany(history.map((h, i) => `  ${String(i + 1).padStart(3)}  ${h}`));
+          }
+          break;
+
+        case "neofetch":
+          printMany([
+            `${profile.name}@portfolio`,
+            "-----------------------",
+            `Role     : ${profile.role}`,
+            `Handle   : @${profile.handle}`,
+            `Focus    : Backend · Databases · Cybersecurity · AI/ML`,
+            `Projects : ${projects.length} shipped`,
+            `Stack    : ${techGroups.reduce((n, g) => n + g.items.length, 0)}+ technologies`,
+            `Shell    : portfolio-bash 1.0`,
+          ]);
+          break;
+
         case "date":
           print(new Date().toString());
           break;
@@ -218,7 +246,7 @@ export function Terminal() {
           print(`command not found: ${cmd}. Type "help".`, "err");
       }
     },
-    [print, printMany, router, close, setTheme]
+    [print, printMany, router, close, setTheme, history]
   );
 
   // Open via custom event.
